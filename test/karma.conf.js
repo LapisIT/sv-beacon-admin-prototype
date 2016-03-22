@@ -29,6 +29,9 @@ module.exports = function(config) {
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-touch/angular-touch.js',
+      'bower_components/firebase/firebase.js',
+      'bower_components/node-uuid/uuid.js',
+      'bower_components/angular-uuid4/angular-uuid4.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

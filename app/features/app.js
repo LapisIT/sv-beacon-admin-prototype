@@ -15,7 +15,10 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'svBeaconAdminPrototypeApp.messages',
+    'svBeaconAdminPrototypeApp.validations',
+    'uuid4'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -32,4 +35,7 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+  })
+  .run(function (Firebases) {
+
   });
