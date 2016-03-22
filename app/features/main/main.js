@@ -18,9 +18,9 @@ angular.module('svBeaconAdminPrototypeApp')
     ctrl.create = function() {
 
     }
-    Locations.load().then(function (rooms) {
-      $log.info('Rooms.load() ', rooms);
-      ctrl.rooms = rooms;
+    Locations.load().then(function (locations) {
+      $log.info('Locations.load() ', locations);
+      ctrl.locations = locations;
     })
 
 

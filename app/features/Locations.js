@@ -4,31 +4,31 @@ angular.module('svBeaconAdminPrototypeApp')
               Validations, Firebases, uuid4) {
       var Locations = {}, isDefined = Validations.isDefined, isEmpty = Validations.isEmpty;
       var deferred;
-      var locationPath = 'rooms';
+      var locationPath = 'locations';
 
-      var rooms = function() {
+      var locations = function() {
         return Firebases.rootRef().then(function (rootRef) {
           return rootRef.child(locationPath);
         });
       }
 
-      var create = function (roomNo, beaconId) {
-        rooms().then(function (rooms) {
-          var newRoomRef = rooms.push({roomNo: roomNo, beaconId: beaconId},function(error) {
+      var create = function (no, beaconId) {
+        locations().then(function (rooms) {
+          var newRef = rooms.push({no: no, beaconId: beaconId},function(error) {
             if (error) {
               $log.info("could not be saved.", error);
             } else {
               $log.info("saved successfully.");
             }
           })
-          var key = newRoomRef.key();
+          var key = newRef.key();
           $log.info("key ", key);
         })
       }
 
       Locations.load = function () {
         deferred = isDefined(deferred)?deferred:$q.defer();
-        rooms().then(function (rooms) {
+        locations().then(function (rooms) {
           rooms.on("value", function(snapshot) {
             deferred.resolve(snapshot.val());
           }, function (errorObject) {
@@ -51,9 +51,9 @@ angular.module('svBeaconAdminPrototypeApp')
       }
 
       $log.info('Creating a room');
-      var roomNo = Math.floor(Math.random() * 100) + 1,beaconId = uuid4.generate();
+      var no = Math.floor(Math.random() * 100) + 1,beaconId = uuid4.generate();
 
-      create(roomNo, beaconId);
+      create(no, beaconId);
 
       return Locations;
 

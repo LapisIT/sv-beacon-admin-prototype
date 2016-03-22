@@ -3,20 +3,22 @@
   <p class="lead">
 
   </p>
-  <rooms>
-    <room  ng-repeat="room in main.rooms">
-      <room-no ng-bind="room.roomNo"></room-no>
-      <beacon-id ng-bind="room.beaconId"></beacon-id>
+  <locations>
+    <location class="row"
+      ng-repeat="location in main.locations">
+      <location-no ng-bind="location.no"></location-no>
+
+      <!-- beacon-id ng-bind="location.beaconId"></beacon-id -->
 
       <attendees>
-        <attendee ng-repeat="attendee in room.attendees">
+        <attendee ng-repeat="attendee in location.attendees">
           <name ng-bind="attendee.name"></name>
           <email ng-bind="attendee.email"></email>
         </attendee>
       </attendees>
-    </room>
+    </location>
 
-  </rooms>
+  </locations>
 
 </section>
 
