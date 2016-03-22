@@ -40,6 +40,8 @@
   },
   "scripts": {
     "test": "karma start test/karma.conf.js",
-    "start":"grunt serve"
+    "start":"grunt serve",
+    "dist":"grunt",
+    "ln":"ln -s /vagrant/sv-beacon-admin-prototype/dist/ /vagrant/sv-beacon-admin-prototype/app/dist"
   }
 }

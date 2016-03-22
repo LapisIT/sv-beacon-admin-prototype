@@ -53,9 +53,9 @@ module.exports = function (grunt) {
       jsTest: {
         files: ['test/spec/{,*/}*.js']
       },
-      styles: {
-        files: ['<%= yeoman.app %>/features/{,**/}*.less'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+      compass: {
+        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+        tasks: ['compass:server', 'postcss:server']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -66,7 +66,7 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
-          '.tmp/features/{,*/}*.css',
+          '.tmp/styles/{,*/}*.css',
           '.tmp/features/{,*/}*.map',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
@@ -90,6 +90,10 @@ module.exports = function (grunt) {
               connect().use(
                 '/bower_components',
                 connect.static('./bower_components')
+              ),
+              connect().use(
+                '/app/styles',
+                connect.static('./app/styles')
               ),
               connect().use(
                 '/app/features',
@@ -303,7 +307,8 @@ module.exports = function (grunt) {
         assetsDirs: [
           '<%= yeoman.dist %>',
           '<%= yeoman.dist %>/images',
-          '<%= yeoman.dist %>/features'
+          '<%= yeoman.dist %>/features',
+          '<%= yeoman.dist %>/styles'
         ],
         patterns: {
           js: [[/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']]
@@ -423,7 +428,8 @@ module.exports = function (grunt) {
             '*.html',
             'fonts/{,*/}*.*',
             'images/{,*/}*.*',
-            'data/{,*/}*.json'
+            'data/{,*/}*.json',
+            'styles/fonts/{,*/}*.*'
           ]
         }, {
           expand: true,
@@ -432,14 +438,14 @@ module.exports = function (grunt) {
           src: ['generated/*']
         }, {
           expand: true,
-          cwd: 'bower_components/bootstrap/dist',
-          src: 'fonts/*',
+          cwd: '.',
+          src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
           dest: '<%= yeoman.dist %>'
         }]
       },
       styles: {
         expand: true,
-        cwd: '<%= yeoman.app %>/features',
+        cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
       }
@@ -516,8 +522,8 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:jscs',
-    'test',
+    //'newer:jscs',
+    //'test',
     'build'
   ]);
 };
