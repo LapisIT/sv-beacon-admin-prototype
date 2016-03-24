@@ -3,9 +3,9 @@
  * validations class
  * @module validations
  */
-angular.module('svBeaconAdminPrototypeApp.validations', [])
+angular.module('svBeaconApis', [])
   .factory('Validations',
-    function ($log, Messages) {
+    function ($log) {
 
       var validations = {};
 
@@ -169,23 +169,6 @@ angular.module('svBeaconAdminPrototypeApp.validations', [])
 
         return validations;
       }
-
-      validations.msgEmail = function() {
-        return Messages.createError('Please enter a valid email address');
-      }
-
-      validations.msgNumber = function() {
-        return Messages.createError('Please enter a valid number');
-      }
-
-      validations.msgRequired = function(field) {
-        return Messages.createError('Please enter a ' + field);
-      }
-
-      validations.msgPhone = function() {
-        return Messages.createError('Please enter a 10 digit phone number without a space or hyphen.');
-      }
-
 
       return validations;
 

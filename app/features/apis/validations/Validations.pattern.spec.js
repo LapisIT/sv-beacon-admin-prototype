@@ -3,7 +3,7 @@
 describe('Service: Validations', function () {
 
   // load the service's module
-  beforeEach(module('svBeaconAdminPrototypeApp'));
+  beforeEach(module('svBeaconApis'));
 
   // instantiate service
   var Validations;

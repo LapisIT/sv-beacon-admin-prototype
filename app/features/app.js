@@ -16,8 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'svBeaconApis',
     'svBeaconAdminPrototypeApp.messages',
-    'svBeaconAdminPrototypeApp.validations',
     'uuid4'
   ])
   .config(function ($routeProvider) {

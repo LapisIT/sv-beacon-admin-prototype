@@ -8,19 +8,15 @@
  * Controller of the svBeaconAdminPrototypeApp
  */
 angular.module('svBeaconAdminPrototypeApp')
-  .controller('MainCtrl', function ($log, Locations) {
+  .controller('MainCtrl', function ($log, Events) {
     var ctrl = this;
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+
     ctrl.create = function() {
 
     }
-    Locations.load().then(function (locations) {
-      $log.info('Locations.load() ', locations);
-      ctrl.locations = locations;
+    Events.load().then(function (event) {
+      $log.info('Events.load() ', event);
+      ctrl.event = event;
     })
 
 

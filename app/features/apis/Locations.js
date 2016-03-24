@@ -1,4 +1,4 @@
-angular.module('svBeaconAdminPrototypeApp')
+angular.module('svBeaconApis')
   .factory('Locations',
     function ($http, $q, $log,
               Validations, Firebases, uuid4) {

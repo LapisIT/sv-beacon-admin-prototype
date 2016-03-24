@@ -1,24 +1,24 @@
 <section class="jumbotron ">
-  <h1>Welcome to SVBeacon Dashboard</h1>
+  <h3>Welcome to SVBeacon Dashboard</h3>
   <p class="lead">
 
   </p>
-  <locations>
-    <location class="row"
-      ng-repeat="location in main.locations">
-      <location-no ng-bind="location.no"></location-no>
+  <event>
+    <name ng-bind="main.event.name"></name>
+    <organiser ng-bind="main.event.organiser"></organiser>
+    <beacons>
 
-      <!-- beacon-id ng-bind="location.beaconId"></beacon-id -->
+      <beacon ng-repeat="(beaconKey, beacon) in main.event.beacons">
+        <h4 ng-bind="beacon.locationName" style="color:{{beacon.colour}}"></h4>
+        <ul>
+          <li ng-repeat="(proximityKey, proximityContent) in beacon.proximity">
+            {{proximityKey}}:{{proximityContent}}
+          </li>
+        </ul>
+      </beacon>
+    </beacons>
 
-      <attendees>
-        <attendee ng-repeat="attendee in location.attendees">
-          <name ng-bind="attendee.name"></name>
-          <email ng-bind="attendee.email"></email>
-        </attendee>
-      </attendees>
-    </location>
-
-  </locations>
+  </event>
 
 </section>
 

@@ -1,4 +1,4 @@
-angular.module('svBeaconAdminPrototypeApp')
+angular.module('svBeaconApis')
   .factory('Firebases',
     function ($http, $q, $log,
               Validations) {
@@ -7,7 +7,6 @@ angular.module('svBeaconAdminPrototypeApp')
       //https://q8ey5cxtdfh.firebaseio-demo.com/
       var rootRef = new Firebase('https://glowing-inferno-5531.firebaseio.com/');
       var deferred;
-
 
       Firebases.rootRef = function () {
         deferred = isDefined(deferred)?deferred:$q.defer();
