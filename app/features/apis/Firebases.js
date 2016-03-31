@@ -1,6 +1,7 @@
 angular.module('svBeaconApis')
   .factory('Firebases',
     function ($http, $q, $log,
+              $firebaseObject,
               Validations) {
       var Firebases = {}, isDefined = Validations.isDefined, isEmpty = Validations.isEmpty;
       //https://glowing-inferno-5531.firebaseio.com/

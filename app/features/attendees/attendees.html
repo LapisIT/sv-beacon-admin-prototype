@@ -1,0 +1,21 @@
+<section class="jumbotron ">
+  <h3>Attendees</h3>
+  <p class="lead">
+
+  </p>
+  <event>
+    <h3 ng-bind="attendees.event.name"></h3>
+    Signals: {{attendees.attendees.length}}
+    <ol>
+      <li ng-repeat="attendees in attendees.attendees | attendeesFilter">
+        <received-at ng-bind="attendees.receivedAt | toDate | date:'HH:mm:ss'"></received-at>
+        <name ng-bind="attendees.user.name"></name>
+        <name ng-bind="attendees.user.name"></name>
+      </li>
+    </ol>
+
+
+  </event>
+
+</section>
+

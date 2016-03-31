@@ -18,7 +18,8 @@ angular
     'ngTouch',
     'svBeaconApis',
     'svBeaconAdminPrototypeApp.messages',
-    'uuid4'
+    'uuid4',
+    'firebase'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -27,10 +28,10 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+      .when('/attendees', {
+        templateUrl: 'features/attendees/attendees.html',
+        controller: 'AttendeesCtrl',
+        controllerAs: 'attendees'
       })
       .otherwise({
         redirectTo: '/'
