@@ -1,0 +1,9 @@
+{
+  "firebase": "glowing-inferno-5531",
+  "public": "dist",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

@@ -11,3 +11,4 @@ npm install -g yo
 npm install -g grunt-cli bower yo generator-karma generator-angular
 
 npm install -g firebase-tools
+

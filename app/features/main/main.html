@@ -4,17 +4,30 @@
 
   </p>
   <event>
-    <name ng-bind="main.event.name"></name>
+    <h3 ng-bind="main.event.name"></h3>
+    <summary ng-bind="main.event.summary"></summary>
+    Presenters: <presenters ng-bind="main.event.presenters">
+    </presenters>
     <organiser ng-bind="main.event.organiser"></organiser>
+    <a ng-href="{{main.event.website}}">Find out more details...</a>
     <beacons>
 
       <beacon ng-repeat="(beaconKey, beacon) in main.event.beacons">
-        <h4 ng-bind="beacon.locationName" style="color:{{beacon.colour}}"></h4>
-        <ul>
+        <h4 style="color:{{beacon.colour}}"><location ng-bind="beacon.locationName"></location> </h4>
+        <h5>Presenter <presenter ng-bind="beacon.program.presenter"></presenter></h5>
+
+        <!-- ul>
           <li ng-repeat="(proximityKey, proximityContent) in beacon.proximity">
             {{proximityKey}}:{{proximityContent}}
           </li>
-        </ul>
+        </ul -->
+
+        <h5>Attendees {{::beacon.attendees.length}}</h5>
+        <ol>
+          <li ng-repeat="attendee in beacon.attendees | limitTo:10">
+            <user ng-bind="attendee.name"></user>
+          </li>
+        </ol>
       </beacon>
     </beacons>
 

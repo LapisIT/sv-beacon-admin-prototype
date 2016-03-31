@@ -1,8 +1,9 @@
 angular.module('svBeaconApis')
   .factory('Events',
     function ($http, $q, $log,
-              Validations, Firebases, EventData) {
-      var Events = {}, isDefined = Validations.isDefined, isEmpty = Validations.isEmpty;
+              Validations, Firebases, EventData, Attendees, Beacons) {
+      var Events = {beacons:Beacons, data: EventData, attendees:Attendees},
+        isDefined = Validations.isDefined, isEmpty = Validations.isEmpty;
       var path = 'events', deferred;
       var events = function() {
         return Firebases.rootRef().then(function (rootRef) {
