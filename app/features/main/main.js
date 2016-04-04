@@ -14,7 +14,7 @@ angular.module('svBeaconAdminPrototypeApp')
 
     Events.whereabouts.load().then(function (whereabouts) {
       $log.info('Events.locations.load() ', whereabouts);
-      ctrl.whereabouts = locations;
+      ctrl.whereabouts = whereabouts;
     })
 
 
