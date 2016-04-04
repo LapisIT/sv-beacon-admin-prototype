@@ -28,10 +28,10 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/attendees', {
-        templateUrl: 'features/attendees/attendees.html',
-        controller: 'AttendeesCtrl',
-        controllerAs: 'attendees'
+      .when('/settings', {
+        templateUrl: 'features/settings/settings.html',
+        controller: 'SettingsCtrl',
+        controllerAs: 'settings'
       })
       .when('/signal-logs', {
         templateUrl: 'features/signal-logs/signal-logs.html',

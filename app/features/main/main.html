@@ -13,9 +13,8 @@
     <a ng-href="{{main.event.website}}" target="_blank">Find out more details...</a>
 
     <locations>
-      <location ng-repeat="(key, location) in main.event.locations">
+      <location ng-repeat="location in main.locations | orderBy:'order'">
         <h4 style="color:{{location.colour}}"><location ng-bind="location.locationName"></location> </h4>
-
       </location>
     </locations>
 

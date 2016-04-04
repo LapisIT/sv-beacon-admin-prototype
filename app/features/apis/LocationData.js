@@ -13,6 +13,10 @@ angular.module('svBeaconApis')
           '#85C2E5','Protect','219 - 252 PAX'));
       locations.push(createBeacon('blueberry', 'db62f71df1d8', '61912', '63261',
           '#C80101','Prosper','220 - 252 PAX'));
+      locations.push(createBeacon('mint', 'e208d3f96d73', '28019', '54265',
+        '#176D00','SV Booth','TBD'));
+      locations.push(createBeacon('ice', 'cffb1b05c7c8', '51144', '6917',
+        '#176D00','Somewhere','TBD'));
       LocationData.locations = locations;
 
       return LocationData;

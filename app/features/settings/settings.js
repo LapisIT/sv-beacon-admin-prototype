@@ -8,7 +8,7 @@
  * Controller of the svBeaconAdminPrototypeApp
  */
 angular.module('svBeaconAdminPrototypeApp')
-  .controller('MainCtrl', function ($log, $scope, Events, Validations, $firebaseArray) {
+  .controller('SettingsCtrl', function ($log, $scope, Events, Validations, $firebaseArray) {
     var ctrl = this, isDefined = Validations.isDefined;
     ctrl.event = Events.data.event;
 
