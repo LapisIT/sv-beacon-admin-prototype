@@ -1,9 +1,9 @@
 angular.module('svBeaconApis')
-  .factory('Attendees',
+  .factory('Signals',
     function ($http, $q, $log,
               Validations, Firebases, $firebaseObject,
               $firebaseArray) {
-      var Attendees = {}, isDefined = Validations.isDefined, isEmpty = Validations.isEmpty;
+      var Signals = {}, isDefined = Validations.isDefined, isEmpty = Validations.isEmpty;
       var path = 'signals', deferred;
 
       var signals = function() {
@@ -12,15 +12,15 @@ angular.module('svBeaconApis')
         });
       }
 
-      Attendees.remove = function() {
+      Signals.remove = function() {
         return signals().then(function (signals) {
           signals.remove();
         })
       }
       
-      Attendees.remove();
+      Signals.remove();
 
-      Attendees.load = function () {
+      Signals.load = function () {
         deferred = isDefined(deferred)?deferred:$q.defer();
         signals().then(function (signals) {
           var singalsAsArray = $firebaseArray(signals);
@@ -33,7 +33,7 @@ angular.module('svBeaconApis')
         return deferred.promise;
       }
 
-      Attendees.load = function () {
+      Signals.load = function () {
         deferred = isDefined(deferred)?deferred:$q.defer();
         signals().then(function (signals) {
           var singalsAsArray = $firebaseArray(signals);
@@ -46,7 +46,7 @@ angular.module('svBeaconApis')
         return deferred.promise;
       }
 
-      return Attendees;
+      return Signals;
 
 
     })

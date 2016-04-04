@@ -5,15 +5,15 @@
   </p>
   <event>
 
-    <h3 ng-bind="attendees.event.name"></h3>
-    Signals: {{attendees.attendees.length}}
+    <h3 ng-bind="signalLogs.event.name"></h3>
+    Signals: {{signalLogs.signals.length}}
     <ol>
-      <li ng-repeat="attendee in attendees.attendees | attendeesFilter">
-        <received-at ng-bind="attendee.receivedAt | toDate | date:'HH:mm:ss'"></received-at>
-        <location ng-bind="attendees.eventInfo(attendee)"></location>
-        <type ng-bind="attendee.type"></type>
-        <proximity ng-bind="attendee.beacon.proximity"></proximity>
-        <name ng-bind="attendee.user.name"></name>
+      <li ng-repeat="signal in signalLogs.signals | attendeesFilter">
+        <received-at ng-bind="signal.receivedAt | toDate | date:'HH:mm:ss'"></received-at>
+        <location ng-bind="attendees.eventInfo(signal)"></location>
+        <type ng-bind="signal.type"></type>
+        <proximity ng-bind="signal.beacon.proximity"></proximity>
+        <name ng-bind="signal.user.name"></name>
 
       </li>
     </ol>

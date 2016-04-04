@@ -42,6 +42,6 @@ angular
         redirectTo: '/'
       });
   })
-  .run(function (Firebases) {
+  .run(function () {
 
   });

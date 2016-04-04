@@ -17,13 +17,12 @@ angular.module('svBeaconAdminPrototypeApp')
     }
 
 
-
     Events.load().then(function (event) {
       $log.info('Events.load() ', event);
       ctrl.event = event;
-      return Events.attendees.load();
-    }).then(function (attendees) {
-      ctrl.attendees = attendees;
+      return Events.signals.load();
+    }).then(function (signals) {
+      ctrl.signals = signals;
     })
 
 
