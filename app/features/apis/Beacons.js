@@ -4,6 +4,7 @@ angular.module('svBeaconApis')
               Validations) {
       var Beacons = {}, isDefined = Validations.isDefined, isEmpty = Validations.isEmpty;
       var proximitySignals = {immediate:'ProximityImmediate',near:'ProximityNear',far:'ProximityFar',unknown:'ProximityUnknown'};
+      Beacons.proximitySignals = proximitySignals;
 
       var isImmediate = function(proximitySignal) {
         return proximitySignal === proximitySignals.immediate;

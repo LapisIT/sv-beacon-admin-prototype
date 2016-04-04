@@ -1,19 +1,24 @@
 <section class="jumbotron ">
-  <h3>Welcome to SVEvents Dashboard</h3>
-  <p class="lead">
-
-  </p>
-  <event>
-    <h3 ng-bind="settings.event.name"></h3>
-
+  <h3>Settings</h3>
+  <config>
+    <h4>Whereabouts</h4>
     <locations>
       <location ng-repeat="location in settings.locations | orderBy:'order'">
         <h4 style="color:{{location.colour}}"><location ng-bind="location.locationName"></location> </h4>
-
+        <label>Proximity</label>
+        <hint>Prosimity to decide whether the user is entered or exited</hint>
+        <br>
+        <value ng-bind="location.settings.whereabouts.proximity"></value>
+        <br>
+        <label>Number of Times to decide</label>
+        <hint>Number of signals or seconds to decide whether the user is entered or exited</hint>
+        <br>
+        <value ng-bind="location.settings.whereabouts.numberOfTimesToDecide"></value>
+        <br>
       </location>
     </locations>
 
-  </event>
+  </config>
 
 </section>
 
