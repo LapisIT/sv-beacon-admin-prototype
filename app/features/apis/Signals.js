@@ -7,9 +7,7 @@ angular.module('svBeaconApis')
       var path = 'signals', deferred;
 
       var signals = function() {
-        return Firebases.rootRef().then(function (rootRef) {
-          return rootRef.child(path);
-        });
+        return Firebases.childRef(path);
       }
 
       Signals.remove = function() {
@@ -17,21 +15,8 @@ angular.module('svBeaconApis')
           signals.remove();
         })
       }
-      
+
       Signals.remove();
-
-      Signals.load = function () {
-        deferred = isDefined(deferred)?deferred:$q.defer();
-        signals().then(function (signals) {
-          var singalsAsArray = $firebaseArray(signals);
-
-          deferred.resolve(singalsAsArray);
-        }, function (err) {
-          deferred.reject(err);
-        })
-
-        return deferred.promise;
-      }
 
       Signals.load = function () {
         deferred = isDefined(deferred)?deferred:$q.defer();

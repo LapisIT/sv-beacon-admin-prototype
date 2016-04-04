@@ -11,10 +11,14 @@ angular.module('svBeaconApis')
 
       Firebases.rootRef = function () {
         deferred = isDefined(deferred)?deferred:$q.defer();
-
         deferred.resolve(rootRef);
-
         return deferred.promise;
+      }
+
+      Firebases.childRef = function(path) {
+        return Firebases.rootRef().then(function (rootRef) {
+          return rootRef.child(path);
+        });
       }
 
 

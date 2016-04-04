@@ -4,12 +4,10 @@ angular.module('svBeaconApis')
               Validations, Firebases) {
       var Locations = {}, isDefined = Validations.isDefined, isEmpty = Validations.isEmpty;
       var deferred;
-      var locationPath = 'events/locations';
+      var path = 'events/locations';
 
       var locations = function() {
-        return Firebases.rootRef().then(function (rootRef) {
-          return rootRef.child(locationPath);
-        });
+        return Firebases.childRef(path);
       }
 
       Locations.load = function () {
