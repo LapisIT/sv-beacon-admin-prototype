@@ -4,13 +4,17 @@
 
   </p>
   <event>
+
     <h3 ng-bind="attendees.event.name"></h3>
     Signals: {{attendees.attendees.length}}
     <ol>
-      <li ng-repeat="attendees in attendees.attendees | attendeesFilter">
-        <received-at ng-bind="attendees.receivedAt | toDate | date:'HH:mm:ss'"></received-at>
-        <name ng-bind="attendees.user.name"></name>
-        <name ng-bind="attendees.user.name"></name>
+      <li ng-repeat="attendee in attendees.attendees | attendeesFilter">
+        <received-at ng-bind="attendee.receivedAt | toDate | date:'HH:mm:ss'"></received-at>
+        <location ng-bind="attendees.eventInfo(attendee)"></location>
+        <type ng-bind="attendee.type"></type>
+        <proximity ng-bind="attendee.beacon.proximity"></proximity>
+        <name ng-bind="attendee.user.name"></name>
+
       </li>
     </ol>
 
