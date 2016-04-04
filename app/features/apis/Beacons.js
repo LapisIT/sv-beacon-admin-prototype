@@ -11,11 +11,9 @@ angular.module('svBeaconApis')
       Beacons.isImmediate = isImmediate;
 
       var createBeacon = function (beaconName, identifier, major, minor,
-                                   colour, locationName,
-                                   immediate, near, far, unknown) {
+                                   colour, locationName, physicalName) {
         return {beaconName:beaconName,identifier:identifier, major:major, minor:minor,
-          colour:colour, locationName:locationName,
-          proximity:{immediate:immediate, near:near, far:far, unknown:unknown}}
+          colour:colour, locationName:locationName, physicalName:physicalName}
       }
 
 
@@ -27,19 +25,21 @@ angular.module('svBeaconApis')
         return toKey(uuid, beacon.major, beacon.minor);
       }
 
-      var addBeacons = function (event, beacons) {
-        var bs = {}
-        beacons.forEach(function (beacon, index) {
-          beacon.order = index + 1;
-          bs[createKey(event, beacon)] = beacon;
+      var asObjects = function (uuid, locations) {
+        var obj = {}
+        locations.forEach(function (location, index) {
+          location.order = index + 1;
+          obj[createKey(uuid, location)] = location;
         })
-        return bs;
+        return obj;
       }
-      
+
       Beacons.createBeacon = createBeacon;
       Beacons.toKey = toKey;
       Beacons.createKey = createKey;
-      Beacons.addBeacons = addBeacons;
+      Beacons.asObjects = asObjects;
+
+
       return Beacons;
 
 

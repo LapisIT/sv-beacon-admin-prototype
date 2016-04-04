@@ -1,5 +1,5 @@
 <section class="jumbotron ">
-  <h3>Welcome to SVBeacon Dashboard</h3>
+  <h3>Welcome to SVEvents Dashboard</h3>
   <p class="lead">
 
   </p>
@@ -9,27 +9,16 @@
     Presenters: <presenters ng-bind="main.event.presenters">
     </presenters>
     <organiser ng-bind="main.event.organiser"></organiser>
-    <a ng-href="{{main.event.website}}">Find out more details...</a>
-    <beacons>
-      <beacon ng-repeat="(beaconKey, beacon) in main.event.beacons">
-        <h4 style="color:{{beacon.colour}}"><location ng-bind="beacon.locationName"></location> </h4>
-        <h5>Presenter <presenter ng-bind="beacon.program.presenter"></presenter></h5>
+    <br>
+    <a ng-href="{{main.event.website}}" target="_blank">Find out more details...</a>
 
-        <!-- ul>
-          <li ng-repeat="(proximityKey, proximityContent) in beacon.proximity">
-            {{proximityKey}}:{{proximityContent}}
-          </li>
-        </ul -->
+    <locations>
+      <location ng-repeat="(key, location) in main.event.locations">
+        <h4 style="color:{{location.colour}}"><location ng-bind="location.locationName"></location> </h4>
 
-        <!-- h5>Attendees {{main.attendees.length}}</h5>
-        <ol>
-          <li ng-repeat="attendee in beacon.attendees | limitTo:10">
-            <user ng-bind="attendee.name"></user>
-          </li>
-        </ol -->
-      </beacon>
-    </beacons>
-    <a ng-href="#/attendees">Checkout attendees</a>
+      </location>
+    </locations>
+
   </event>
 
 </section>

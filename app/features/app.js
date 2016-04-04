@@ -33,6 +33,11 @@ angular
         controller: 'AttendeesCtrl',
         controllerAs: 'attendees'
       })
+      .when('/signal-logs', {
+        templateUrl: 'features/signal-logs/signal-logs.html',
+        controller: 'SignalLogsCtrl',
+        controllerAs: 'signalLogs'
+      })
       .otherwise({
         redirectTo: '/'
       });
