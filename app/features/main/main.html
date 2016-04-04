@@ -13,8 +13,13 @@
     <a ng-href="{{main.event.website}}" target="_blank">Find out more details...</a>
 
     <locations>
-      <location ng-repeat="location in main.locations | orderBy:'order'">
+      <location ng-repeat="location in main.whereabouts | orderBy:'order'">
         <h4 style="color:{{location.colour}}"><location ng-bind="location.locationName"></location> </h4>
+        <users>
+          <user ng-repeat="user in locations.users">
+            <name ng-blind="user.name"></name>
+          </user>
+        </users>
       </location>
     </locations>
 

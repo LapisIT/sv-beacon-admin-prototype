@@ -12,9 +12,9 @@ angular.module('svBeaconAdminPrototypeApp')
     var ctrl = this, isDefined = Validations.isDefined;
     ctrl.event = Events.data.event;
 
-    Events.whereabouts.load().then(function (locations) {
-      $log.info('Events.locations.load() ', locations);
-      ctrl.locations = $firebaseArray(locations);
+    Events.whereabouts.load().then(function (whereabouts) {
+      $log.info('Events.locations.load() ', whereabouts);
+      ctrl.whereabouts = locations;
     })
 
 
