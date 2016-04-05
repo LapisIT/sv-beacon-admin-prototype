@@ -23,8 +23,8 @@
         <h4 style="color:{{location.colour}}"><location ng-bind="location.name"></location> </h4>
         <users>
           <user ng-repeat="(entryKey, entry) in location.users">
-            <name ng-blind="entry.user.name"></name>
-            <received-at ng-blind="entry.receivedAt"></received-at>
+            <username ng-bind="entry.user.name"></username>
+            <received-at ng-bind="entry.receivedAt | toDate | date:'HH:mm:ss'""></received-at>
           </user>
         </users>
       </location>
