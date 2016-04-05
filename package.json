@@ -1,6 +1,6 @@
 {
   "name": "svbeaconadminprototype",
-  "version":"1.0.0",
+  "version": "1.0.1",
   "private": true,
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
@@ -41,8 +41,8 @@
   },
   "scripts": {
     "test": "karma start test/karma.conf.js",
-    "start":"grunt serve",
-    "dist":"grunt",
-    "ln":"ln -s /vagrant/sv-beacon-admin-prototype/dist/ /vagrant/sv-beacon-admin-prototype/app/dist"
+    "start": "grunt serve",
+    "dist": "grunt",
+    "ln": "ln -s /vagrant/sv-beacon-admin-prototype/dist/ /vagrant/sv-beacon-admin-prototype/app/dist"
   }
 }
