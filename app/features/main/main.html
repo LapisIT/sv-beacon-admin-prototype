@@ -1,46 +1,51 @@
-<section class="jumbotron ">
-  <h3>Welcome to SVEvents Dashboard</h3>
-  <p class="lead">
+<section class="jumbotron " style="padding-top: 30px;">
+  <!--<h3>Welcome to SVEvents Dashboard</h3>-->
+  <!--<p class="lead">-->
 
-  </p>
-  <event>
-    <h3 ng-bind="main.event.name"></h3>
-    <summary ng-bind="main.event.summary"></summary>
-    <organiser ng-bind="main.event.organiser"></organiser>
-    <br>
-    <a ng-href="{{main.event.website}}" target="_blank">Find out more details...</a>
-    <h3>Registered users <small>({{main.users.length}})</small></h3>
+  <!--</p>-->
+  <!--<event>-->
+  <!--<h3 ng-bind="main.event.name"></h3>-->
+  <!--<summary ng-bind="main.event.summary"></summary>-->
+  <!--<organiser ng-bind="main.event.organiser"></organiser>-->
+  <!--<br>-->
+  <!--<a ng-href="{{main.event.website}}" target="_blank">Find out more details...</a>-->
+  <h3 style="margin-left: -20px;">Whereabouts
+    <small>({{main.whereabouts.length}})</small>
+  </h3>
 
-    <ol class="users">
-      <li class="user" ng-repeat="user in main.users">
-        <name ng-bind="user.name"></name>
-      </li>
-    </ol>
-    <h3>Whereabouts <small>({{main.whereabouts.length}})</small></h3>
+  <locations class="row locations visualised">
+    <location class="location" ng-repeat="location in main.whereabouts | orderBy:'order'"
+              style="border-top: solid 10px {{location.colour}}">
+      <h6 style="border-bottom: solid 1px #ccc; padding-bottom: 3px;">{{location.name}} ({{count(location.users)}})</h6>
+      <users class="users">
+        <user class="user" ng-repeat="(entryKey, entry) in location.users">
+          <i class="icon glyphicon glyphicon-user"></i>
+          <username ng-bind="entry.user.name"></username>
+          <small>(
+            <received-at ng-bind="entry.receivedAt | toDate | date:'HH:mm:ss'"></received-at>
+            )
+          </small>
+        </user>
+      </users>
+    </location>
+  </locations>
+  <small class="users" style="margin-top: 10px; margin-left: -15px; display: block;">
+    Registered users:
+      <span class="user" ng-repeat="user in main.users" style="display: inline-block;">
+        <name>{{user.name}},&nbsp;</name>
+      </span>
+  </small>
 
-    <locations class="row locations visualised">
-      <location class="location" ng-repeat="location in main.whereabouts" style="border-top: solid 10px {{location.colour}}">
-        <h6 style="border-bottom: solid 1px #ccc; padding-bottom: 3px;">{{location.name}} ({{count(location.users)}})</h6>
-        <users class="users">
-          <user class="user" ng-repeat="(entryKey, entry) in location.users">
-            <i class="icon glyphicon glyphicon-user"></i>
-            <username ng-bind="entry.user.name"></username>
-            <small>(<received-at ng-bind="entry.receivedAt | toDate | date:'HH:mm:ss'"></received-at>)</small>
-          </user>
-        </users>
-      </location>
-    </locations>
-
-    <!--<ol class="locations">-->
-      <!--<li class="location" ng-repeat="location in main.whereabouts">-->
-        <!--<h4 style="color:{{location.colour}}"><location ng-bind="location.name"></location> </h4>-->
-        <!--<ul class="users">-->
-          <!--<li class="user" ng-repeat="(entryKey, entry) in location.users">-->
-            <!--<username ng-bind="entry.user.name"></username>-->
-          <!--</li>-->
-        <!--</ul>-->
-      <!--</li>-->
-    <!--</ol>-->
+  <!--<ol class="locations">-->
+  <!--<li class="location" ng-repeat="location in main.whereabouts">-->
+  <!--<h4 style="color:{{location.colour}}"><location ng-bind="location.name"></location> </h4>-->
+  <!--<ul class="users">-->
+  <!--<li class="user" ng-repeat="(entryKey, entry) in location.users">-->
+  <!--<username ng-bind="entry.user.name"></username>-->
+  <!--</li>-->
+  <!--</ul>-->
+  <!--</li>-->
+  <!--</ol>-->
 
   </event>
 
