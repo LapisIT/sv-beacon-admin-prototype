@@ -13,7 +13,7 @@ angular.module('svBeaconApis')
       Users.load = function () {
         deferred = isDefined(deferred)?deferred:$q.defer();
         users().then(function (users) {
-          deferred.resolve($firebaseArray(users));
+          deferred.resolve(users);
         })
 
         return deferred.promise;

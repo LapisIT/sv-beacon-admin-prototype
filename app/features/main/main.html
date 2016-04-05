@@ -9,14 +9,22 @@
     <organiser ng-bind="main.event.organiser"></organiser>
     <br>
     <a ng-href="{{main.event.website}}" target="_blank">Find out more details...</a>
+    <h3>Registered users {{main.users.length}}</h3>
+
+    <users>
+      <user ng-repeat="user in main.users">
+        <name ng-bind="user.name"></name>
+      </user>
+    </users>
+    <h3>Whereabouts {{main.whereabouts.length}}</h3>
 
     <locations>
-      <location ng-repeat="(locationKey, location) in main.whereabouts">
-        <h4 style="color:{{location.colour}}"><location ng-bind="location.locationName"></location> </h4>
+      <location ng-repeat="location in main.whereabouts">
+        <h4 style="color:{{location.colour}}"><location ng-bind="location.name"></location> </h4>
         <users>
-          <user ng-repeat="(entryKey, entry) in locations">
+          <user ng-repeat="(entryKey, entry) in location.users">
             <name ng-blind="entry.user.name"></name>
-            <received-at ng-blind="entry.user.receivedAt"></received-at>
+            <received-at ng-blind="entry.receivedAt"></received-at>
           </user>
         </users>
       </location>

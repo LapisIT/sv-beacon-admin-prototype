@@ -8,13 +8,24 @@
  * Controller of the svBeaconAdminPrototypeApp
  */
 angular.module('svBeaconAdminPrototypeApp')
-  .controller('MainCtrl', function ($log, $scope, Events, Validations, $firebaseArray) {
+  .controller('MainCtrl', function ($log, $scope, Events, Validations,
+                                    $firebaseArray, Users) {
     var ctrl = this, isDefined = Validations.isDefined;
     ctrl.event = Events.data.event;
-
-    Events.whereabouts.load().then(function (whereabouts) {
+    Users.load().then(function (users) {
+      ctrl.users = $firebaseArray(users);
+        $log.info('Users.load() ', ctrl.users.length);
+        ctrl.users.$loaded().then(function(){
+          $log.info('$loaded ', ctrl.users.length);
+        });
+      return Events.whereabouts.load();
+    })
+    .then(function (whereabouts) {
       ctrl.whereabouts = $firebaseArray(whereabouts);
-      $log.info('Events.locations.load() how many rooms? ', ctrl.whereabouts.length);
+      $log.info('Events.whereabouts.load() how many rooms? ', ctrl.whereabouts.length);
+      ctrl.whereabouts.$loaded().then(function(){
+        $log.info('$loaded ', ctrl.whereabouts.length);
+      });
     })
 
 

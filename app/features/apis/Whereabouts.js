@@ -34,7 +34,8 @@ angular.module('svBeaconApis')
         var whereaboutsNew = {};
         var deferred = $q.defer();
         locations.forEach(function (location) {
-          whereaboutsNew[location.locationName] = {created:new Date().getTime()};
+          whereaboutsNew[location.locationName] =
+          {created:new Date().getTime(), name: location.locationName, order: location.order};
         })
 
         whereabouts().then(function (whereabouts) {
