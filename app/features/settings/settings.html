@@ -1,21 +1,23 @@
-<section class="jumbotron ">
+<section class="col col-md-12 ">
   <h3>Settings</h3>
   <config>
     <h4>Locations</h4>
+    <notification show="true" invalid="true" message="settings.summary"></notification>
     <button class="btn btn-primary"
     ng-click="settings.update(settings.event, settings.locations)">Update Locations</button>
     <locations>
       <location ng-repeat="location in settings.locations | orderBy:'order'">
         <h4 style="color:{{location.colour}}"><location ng-bind="location.locationName"></location> </h4>
+        <h5>{{settings.event.id}}:{{location.major}}:{{location.minor}}</h5>
         <label>Proximity</label>
         <hint>Prosimity to decide whether the user is entered or exited</hint>
         <br>
-        <value ng-bind="location.settings.whereabouts.proximity"></value>
+        <input class="form-control" ng-model="location.settings.whereabouts.proximity" disabled>
         <br>
         <label>Number of Times to decide</label>
         <hint>Number of signals or seconds to decide whether the user is entered or exited</hint>
         <br>
-        <value ng-bind="location.settings.whereabouts.numberOfTimesToDecide"></value>
+        <input class="form-control" ng-model="location.settings.whereabouts.numberOfTimesToDecide" disabled>
         <br>
       </location>
     </locations>

@@ -8,9 +8,10 @@
  * Controller of the svBeaconAdminPrototypeApp
  */
 angular.module('svBeaconAdminPrototypeApp')
-  .controller('SettingsCtrl', function ($log, $scope, Events, Validations, $firebaseArray) {
+  .controller('SettingsCtrl', function ($log, $scope, Events, Validations, Messages, $firebaseArray) {
     var ctrl = this, isDefined = Validations.isDefined;
     ctrl.event = Events.data.event;
+    ctrl.summary = Messages.initMessages('summary');
 
     Events.locations.load().then(function (locations) {
       $log.info('Events.locations.load() ', locations);
@@ -21,9 +22,9 @@ angular.module('svBeaconAdminPrototypeApp')
       Events.set(event).then(function (saved) {
         return Events.whereabouts.set(locations);
       }).then(function () {
-        
+        ctrl.summary = Messages.createInfo('Saved successfully.');
       })
-      
+
     }
 
   });
