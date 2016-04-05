@@ -9,20 +9,28 @@ angular.module('svBeaconApis')
       var events = function() {
         return Firebases.childRef(path);
       }
-      var create = function (event) {
+
+      var set = function (event) {
+        var deferred = $q.defer();
         events().then(function (events) {
           var newRef = events.set(event,function(error) {
             if (error) {
               $log.info("could not be saved.", error);
+              deferred.reject(error);
             } else {
               $log.info("saved successfully.");
+              deferred.resolve(Events.load());
             }
           })
-          //var key = newRef.key();
-          $log.info("newRef ", newRef);
+          $log.info("set newRef ", newRef);
         })
+
+        return deferred.promise;
       }
-      create(EventData.event);
+
+      Events.set = function (event) {
+        return set(event);
+      };
 
       Events.load = function () {
         deferred = isDefined(deferred)?deferred:$q.defer();

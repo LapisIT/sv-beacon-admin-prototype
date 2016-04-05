@@ -12,7 +12,7 @@
     "angular-touch": "^1.4.0",
     "firebase": "^2.4.1",
     "node-uuid": "~1.4.7",
-    "angular-uuid4": "~0.3.1",
+    "angular-uuid4": "^0.3.1",
     "angularfire": "^1.2.0"
   },
   "devDependencies": {

@@ -13,8 +13,8 @@ angular.module('svBeaconAdminPrototypeApp')
     ctrl.event = Events.data.event;
 
     Events.whereabouts.load().then(function (whereabouts) {
-      $log.info('Events.locations.load() ', whereabouts);
-      ctrl.whereabouts = whereabouts;
+      ctrl.whereabouts = $firebaseArray(whereabouts);
+      $log.info('Events.locations.load() how many rooms? ', ctrl.whereabouts.length);
     })
 
 

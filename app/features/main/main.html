@@ -6,18 +6,17 @@
   <event>
     <h3 ng-bind="main.event.name"></h3>
     <summary ng-bind="main.event.summary"></summary>
-    Presenters: <presenters ng-bind="main.event.presenters">
-    </presenters>
     <organiser ng-bind="main.event.organiser"></organiser>
     <br>
     <a ng-href="{{main.event.website}}" target="_blank">Find out more details...</a>
 
     <locations>
-      <location ng-repeat="location in main.whereabouts.locations | orderBy:'order'">
+      <location ng-repeat="(locationKey, location) in main.whereabouts">
         <h4 style="color:{{location.colour}}"><location ng-bind="location.locationName"></location> </h4>
         <users>
-          <user ng-repeat="user in locations.users">
-            <name ng-blind="user.name"></name>
+          <user ng-repeat="(entryKey, entry) in locations">
+            <name ng-blind="entry.user.name"></name>
+            <received-at ng-blind="entry.user.receivedAt"></received-at>
           </user>
         </users>
       </location>

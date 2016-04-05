@@ -2,6 +2,7 @@ angular.module('svBeaconApis')
   .factory('Firebases',
     function ($http, $q, $log,
               $firebaseObject,
+              uuid4,
               Validations) {
       var Firebases = {}, isDefined = Validations.isDefined, isEmpty = Validations.isEmpty;
       //https://glowing-inferno-5531.firebaseio.com/
@@ -21,6 +22,9 @@ angular.module('svBeaconApis')
         });
       }
 
+      Firebases.normaliseForPath = function(value) {
+        return (isEmpty(value)?uuid4.generate():value.replace(/ /g, ''));
+      }
 
       return Firebases;
 

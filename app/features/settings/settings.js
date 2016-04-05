@@ -17,6 +17,13 @@ angular.module('svBeaconAdminPrototypeApp')
       ctrl.locations = $firebaseArray(locations);
     })
 
-
+    ctrl.update = function (event, locations) {
+      Events.set(event).then(function (saved) {
+        return Events.whereabouts.set(locations);
+      }).then(function () {
+        
+      })
+      
+    }
 
   });
