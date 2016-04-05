@@ -1,4 +1,4 @@
-<section class="jumbotron " style="padding-top: 30px;">
+<section class="jumbotron " style="padding:20px;margin-bottom: 0; font-size: 1.3em;">
   <!--<h3>Welcome to SVEvents Dashboard</h3>-->
   <!--<p class="lead">-->
 
@@ -9,14 +9,14 @@
   <!--<organiser ng-bind="main.event.organiser"></organiser>-->
   <!--<br>-->
   <!--<a ng-href="{{main.event.website}}" target="_blank">Find out more details...</a>-->
-  <h3 style="margin-left: -20px;">Whereabouts
-    <small>({{main.whereabouts.length}})</small>
+  <h3>Whereabouts
+    <small>({{main.whereabouts.length}} rooms)</small>
   </h3>
 
-  <locations class="row locations visualised">
+  <locations class="locations visualised">
     <location class="location" ng-repeat="location in main.whereabouts | orderBy:'order'"
               style="border-top: solid 10px {{location.colour}}">
-      <h6 style="border-bottom: solid 1px #ccc; padding-bottom: 3px;">{{location.name}} ({{count(location.users)}})</h6>
+      <h5 style="border-bottom: solid 1px #ccc; padding-bottom: 3px;">{{location.name}} ({{count(location.users)}})</h5>
       <users class="users">
         <user class="user" ng-repeat="(entryKey, entry) in location.users">
           <i class="icon glyphicon glyphicon-user"></i>
@@ -29,11 +29,8 @@
       </users>
     </location>
   </locations>
-  <small class="users" style="margin-top: 10px; margin-left: -15px; display: block;">
-    Registered users:
-      <span class="user" ng-repeat="user in main.users" style="display: inline-block;">
-        <name>{{user.name}},&nbsp;</name>
-      </span>
+  <small class="users" style="margin-top: 10px; display: block;">
+    Registered users: {{toList(main.users)}}
   </small>
 
   <!--<ol class="locations">-->

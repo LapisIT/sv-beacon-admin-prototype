@@ -38,4 +38,13 @@ angular.module('svBeaconAdminPrototypeApp')
     }
 
 
+    $scope.toList = function (users) {
+      var usersStr = '';
+      angular.forEach(users, function (user) {
+        usersStr = usersStr + user.name + ', ';
+      })
+      return usersStr.slice(0, usersStr.length-2);
+    }
+
+
   });
