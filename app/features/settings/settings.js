@@ -18,9 +18,9 @@ angular.module('svBeaconAdminPrototypeApp')
       ctrl.locations = $firebaseArray(locations);
     })
 
-    ctrl.update = function (event, locations) {
+    ctrl.update = function (event) {
       Events.set(event).then(function (saved) {
-        return Events.whereabouts.set(locations);
+        return Events.whereabouts.set(event.locations);
       }).then(function () {
         ctrl.summary = Messages.createInfo('Saved successfully.');
       })

@@ -4,7 +4,7 @@
     <h4>Locations</h4>
     <notification show="true" invalid="true" message="settings.summary"></notification>
     <button class="btn btn-primary"
-    ng-click="settings.update(settings.event, settings.locations)">Update Locations</button>
+    ng-click="settings.update(settings.event)">Update Locations</button>
     <locations>
       <location ng-repeat="location in settings.locations | orderBy:'order'">
         <h4 style="color:{{location.colour}}"><location ng-bind="location.locationName"></location> </h4>
