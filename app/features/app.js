@@ -38,6 +38,11 @@ angular
         controller: 'SignalLogsCtrl',
         controllerAs: 'signalLogs'
       })
+      .when('/user-histories', {
+        templateUrl: 'features/main/main.html',
+        controller: 'UserHistoryCtrl',
+        controllerAs: 'main'
+      })
       .otherwise({
         redirectTo: '/'
       });
