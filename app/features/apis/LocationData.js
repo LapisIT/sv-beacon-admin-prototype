@@ -32,7 +32,7 @@ angular.module('svBeaconApis')
       locations[index++].settings.whereabouts = Whereabouts.createConfig(Beacons.proximitySignals.near, numberOfTimesToDecide);
 
       locations.push(createBeacon('ice', 'cffb1b05c7c8', '51144', '6917',
-        '#ff6600','SV Office (585 Bourke street)','TBD'));
+        '#ff6600','SV Office','TBD'));
       locations[index].settings = {};
       locations[index++].settings.whereabouts = Whereabouts.createConfig(Beacons.proximitySignals.near, numberOfTimesToDecide);
 

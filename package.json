@@ -43,6 +43,7 @@
     "test": "karma start test/karma.conf.js",
     "start": "grunt serve",
     "dist": "grunt",
+    "dep": "grunt && firebase deploy",
     "ln": "ln -s /vagrant/sv-beacon-admin-prototype/dist/ /vagrant/sv-beacon-admin-prototype/app/dist"
   }
 }
