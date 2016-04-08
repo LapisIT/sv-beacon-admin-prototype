@@ -12,7 +12,7 @@ angular.module('svBeaconAdminPrototypeApp')
                                     $firebaseArray, Users, MonitorWhereabouts) {
     var ctrl = this, isDefined = Validations.isDefined;
     ctrl.event = Events.data.event;
-    var detectAndCleanInterval = 10000;
+    var detectAndCleanInterval = 5000;
 
     var stop = $interval(function () {
       MonitorWhereabouts.detectAndExits(ctrl.whereabouts);
