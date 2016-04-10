@@ -4,7 +4,7 @@ angular.module('svBeaconApis')
               Validations, Beacons, Whereabouts) {
       var LocationData = {}, isDefined = Validations.isDefined, isEmpty = Validations.isEmpty;
       var createBeacon = Beacons.createBeacon;
-      var locations = [], index = 0, numberOfTimesToDecide = 4;
+      var locations = [], index = 0, numberOfTimesToDecide = 8;
 
       // locations.push(createBeacon('blueberry', 'db62f71df1d8', '61912', '63261',
       //   '#C80101','Prosper','220 - 252 PAX'));
@@ -14,7 +14,7 @@ angular.module('svBeaconApis')
       locations.push(createBeacon('ice', 'fc03fce84038', '16440', '64744',
         '#85C2E5','Conference Area','219 - 252 PAX'));
       locations[index].settings = {};
-      locations[index++].settings.whereabouts = Whereabouts.createConfig(Beacons.proximitySignals.near, numberOfTimesToDecide);
+      locations[index++].settings.whereabouts = Whereabouts.createConfig(Beacons.proximitySignals.far, numberOfTimesToDecide);
 
       // locations.push(createBeacon('mint', 'f613db7a8e0a', '36362', '56186',
       //   '#B8D4B5','Build','218 - 120 PAX'));
