@@ -4,7 +4,7 @@ angular.module('svBeaconApis')
               Validations, Beacons, Whereabouts) {
       var LocationData = {}, isDefined = Validations.isDefined, isEmpty = Validations.isEmpty;
       var createBeacon = Beacons.createBeacon;
-      var locations = [], index = 0, numberOfTimesToDecide = 12;
+      var locations = [], index = 0, numberOfTimesToDecide = 15;
 
       // locations.push(createBeacon('blueberry', 'db62f71df1d8', '61912', '63261',
       //   '#C80101','Prosper','220 - 252 PAX'));

@@ -15,7 +15,7 @@ angular.module('svBeaconAdminPrototypeApp')
     var cleanIntervalInMilliseconds = 30000;
 
     var stop = $interval(function () {
-      MonitorWhereabouts.detectAndExits(cleanIntervalInMilliseconds);
+      MonitorWhereabouts.detectAndExits(ctrl.whereabouts, cleanIntervalInMilliseconds);
     }, cleanIntervalInMilliseconds);
 
     $scope.$on('$destroy', function() {

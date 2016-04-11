@@ -52,7 +52,7 @@ angular.module('svBeaconApis').factory('MonitorWhereabouts',
       return receivedAts.length > 1;
     }
 
-    var detectAndExits = function (cleanIntervalInMilliseconds) {
+    var detectAndExits = function (whereabouts, cleanIntervalInMilliseconds) {
       var now =  new Date(),
         nowInMilliseconds = now.getTime();
       $log.info('detectAndExits starting ', now, nowInMilliseconds, ' cleanIntervalInMilliseconds ', cleanIntervalInMilliseconds);
@@ -74,7 +74,7 @@ angular.module('svBeaconApis').factory('MonitorWhereabouts',
         if(!areTwoSignalsSentInInterval(receivedAts)) {
           var location = lastReceivedAtFromUser.location, user = lastReceivedAtFromUser.user;
           $log.info('detectAndExits Only one signal sent in the interval.', location.name, ' ', user.name);
-          ExitFromLocations.exit(lastReceivedAtFromUser.location, lastReceivedAtFromUser.user);
+          ExitFromLocations.exit(whereabouts.locations, lastReceivedAtFromUser.user);
           initLastKnownUserLocation(userKey);
           return;
         }

@@ -9,23 +9,26 @@ angular.module('svBeaconApis')
         return Firebases.childRef(path + (isEmpty(childPath)?'':'/' + childPath));
       }
 
-      ExitFromLocations.exit = function (location, user) {
-        $log.info('ExitFromLocations.exit ', location, user);
-        if(isEmpty(location) || isEmpty(user)) {
+      ExitFromLocations.exit = function (locations, user) {
+        $log.info('ExitFromLocations.exit ', locations, user);
+        if(isEmpty(locations) || isEmpty(user)) {
           $log.error('ExitFromLocations.exit location or user empty... stop processing');
           return;
         }
-        
-        var path = location.name + '/users/' + user.name.replace(/ /g, '');
-        whereabouts(path).then(function (useRef) {
-          useRef.remove(function (error) {
-            if (error) {
-              $log.error("ExitFromLocations, remove from location failed " + location.locationName, error);
-            } else {
-              $log.info("ExitFromLocations, removed from location successfully.", location.locationName);
-            }
-          })
-        });
+
+        locations.forEach(function (location) {
+          var path = locations.name + '/users/' + user.name.replace(/ /g, '');
+          whereabouts(path).then(function (useRef) {
+            useRef.remove(function (error) {
+              if (error) {
+                $log.error("ExitFromLocations, remove from location failed " + locations.locationName, error);
+              } else {
+                $log.info("ExitFromLocations, removed from location successfully.", locations.locationName);
+              }
+            })
+          });
+        })
+
       }
 
 
