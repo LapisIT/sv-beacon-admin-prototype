@@ -10,6 +10,12 @@ angular.module('svBeaconApis')
       }
 
       ExitFromLocations.exit = function (location, user) {
+        $log.info('ExitFromLocations.exit ', location, user);
+        if(isEmpty(location) || isEmpty(user)) {
+          $log.error('ExitFromLocations.exit location or user empty... stop processing');
+          return;
+        }
+        
         var path = location.name + '/users/' + user.name.replace(/ /g, '');
         whereabouts(path).then(function (useRef) {
           useRef.remove(function (error) {
