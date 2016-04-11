@@ -10,8 +10,8 @@ angular.module('svBeaconApis')
       //   '#C80101','Prosper','220 - 252 PAX'));
       // locations[index].settings = {};
       // locations[index++].settings.whereabouts = Whereabouts.createConfig(Beacons.proximitySignals.near, numberOfTimesToDecide);
-
-      locations.push(createBeacon('ice', 'fc03fce84038', '16440', '64744',
+  //36362 56186
+      locations.push(createBeacon('ice', 'fc03fce84038', '36362', '56186',
         '#85C2E5','Conference Area','219 - 252 PAX'));
       locations[index].settings = {};
       locations[index++].settings.whereabouts = Whereabouts.createConfig(Beacons.proximitySignals.far, numberOfTimesToDecide);
@@ -29,12 +29,12 @@ angular.module('svBeaconApis')
       locations.push(createBeacon('mint', 'e208d3f96d73', '28019', '54265',
         '#176D00','SV Booth','TBD'));
       locations[index].settings = {};
-      locations[index++].settings.whereabouts = Whereabouts.createConfig(Beacons.proximitySignals.near, numberOfTimesToDecide);
+      locations[index++].settings.whereabouts = Whereabouts.createConfig(Beacons.proximitySignals.far, numberOfTimesToDecide);
 
       locations.push(createBeacon('ice', 'cffb1b05c7c8', '51144', '6917',
         '#ff6600','SV Office','TBD'));
       locations[index].settings = {};
-      locations[index++].settings.whereabouts = Whereabouts.createConfig(Beacons.proximitySignals.near, numberOfTimesToDecide);
+      locations[index++].settings.whereabouts = Whereabouts.createConfig(Beacons.proximitySignals.far, numberOfTimesToDecide);
 
       LocationData.locations = locations;
 
