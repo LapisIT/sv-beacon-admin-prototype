@@ -5,7 +5,7 @@
 
 angular.module('svBeaconApis').factory('MonitorWhereabouts',
   function ($log, Validations, Firebases, ExitFromLocations) {
-    var path = 'whereabouts', isDefined = Validations.isDefined;
+    var path = 'whereabouts', isDefined = Validations.isDefined, isEmpty = Validations.isEmpty;
     var whereabouts = function (childPath) {
       return Firebases.childRef(path + (isEmpty(childPath) ? '' : '/' + childPath));
     }
@@ -21,11 +21,16 @@ angular.module('svBeaconApis').factory('MonitorWhereabouts',
       lastReceivedAtFromUsers[userKey] = {receivedAts: [], location:{}, user:{}};
     }
 
-    var addReceivedAt = function (userKey,userEntry,location) {
+    var addReceivedAt = function (lastReceivedAtFromUsers, userKey,userEntry,location) {
       $log.info('addReceivedAt ', userKey, userEntry.receivedAt);
       lastReceivedAtFromUsers[userKey].receivedAts.push(userEntry.receivedAt);
       lastReceivedAtFromUsers[userKey].location = location;
       lastReceivedAtFromUsers[userKey].user = userEntry.user;
+      return lastReceivedAtFromUsers;
+    }
+
+    var isNotReceived = function (lastReceivedAtFromUsers, userKey,receivedAt) {
+      return lastReceivedAtFromUsers[userKey].receivedAts.indexOf(receivedAt) === -1;
     }
 
     var monitor = function (whereabouts) {
@@ -39,7 +44,11 @@ angular.module('svBeaconApis').factory('MonitorWhereabouts',
           if (!isUserDefined(userKey)) {
             initLastKnownUserLocation(userKey);
           }
-          addReceivedAt(userKey, userEntry,location);
+
+          if(isNotReceived(lastReceivedAtFromUsers, userKey, userEntry.receivedAt)) {
+            addReceivedAt(lastReceivedAtFromUsers, userKey, userEntry,location);
+          }
+
         })
       })
     }
@@ -48,8 +57,8 @@ angular.module('svBeaconApis').factory('MonitorWhereabouts',
       return (timeElapsedInMilliseconds < cleanIntervalInMilliseconds);
     }
 
-    var areTwoSignalsSentInInterval = function (receivedAts) {
-      return receivedAts.length > 1;
+    var shouldExit = function (user, receivedAts) {
+      return !isEmpty(user.name) && receivedAts.length < 2;
     }
 
     var detectAndExits = function (whereabouts, cleanIntervalInMilliseconds) {
@@ -61,7 +70,8 @@ angular.module('svBeaconApis').factory('MonitorWhereabouts',
         var receivedAts =  lastReceivedAtFromUser.receivedAts,
           numberOfSignals = receivedAts.length,
           oldestSignal = lastReceivedAtFromUser.receivedAts[0],
-          timeElapsedInMilliseconds = nowInMilliseconds - oldestSignal;
+          timeElapsedInMilliseconds = nowInMilliseconds - oldestSignal,
+          user = lastReceivedAtFromUser.user;
 
         $log.info('detectAndExits Checking user: ', userKey, ' numberOfSignals: ', numberOfSignals,
           ' oldestSignal: ', oldestSignal, ' timeElapsedInMilliseconds: ', timeElapsedInMilliseconds);
@@ -71,10 +81,10 @@ angular.module('svBeaconApis').factory('MonitorWhereabouts',
           return;
         }
 
-        if(!areTwoSignalsSentInInterval(receivedAts)) {
-          var location = lastReceivedAtFromUser.location, user = lastReceivedAtFromUser.user;
-          $log.info('detectAndExits Only one signal sent in the interval.', location.name, ' ', user.name);
-          ExitFromLocations.exit(whereabouts.locations, lastReceivedAtFromUser.user);
+        if(shouldExit(user, receivedAts)) {
+          var location = lastReceivedAtFromUser.location;
+          $log.info('detectAndExits Only one unique signal sent in the interval.', location.name, ' ', user.name);
+          ExitFromLocations.exit(whereabouts, lastReceivedAtFromUser.user);
           initLastKnownUserLocation(userKey);
           return;
         }

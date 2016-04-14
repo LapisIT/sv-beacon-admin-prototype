@@ -17,7 +17,8 @@ angular.module('svBeaconApis')
         }
 
         locations.forEach(function (location) {
-          var path = locations.name + '/users/' + user.name.replace(/ /g, '');
+          var path = location.name + '/users/' + user.name.replace(/ /g, '');
+          $log.info('ExitFromLocations.exit path: ', path);
           whereabouts(path).then(function (useRef) {
             useRef.remove(function (error) {
               if (error) {
