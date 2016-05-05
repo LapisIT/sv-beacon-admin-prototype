@@ -94,33 +94,6 @@ angular.module('svBeaconApis').factory('MonitorWhereabouts',
 
       })
 
-      // whereabouts.forEach(function (location) {
-      //   $log.info('detectAndExits checking location: ', location.name);
-      //   angular.forEach(location.users, function (userEntry, userKey) {
-      //     $log.info('detectAndExits checking user: ', userKey);
-      //
-      //     if(!isDefined(lastReceivedAtFromUsers[userKey])) {
-      //       $log.info('No lastReceivedAtFromUsers for user ', userKey);
-      //       return;
-      //     }
-      //
-      //     var notUpdated = lastReceivedAtFromUsers[userKey].receivedAts.filter(function (receivedAt) {
-      //       $log.info('lastReceivedAtFromUsers filter: ', userEntry.user.name, userEntry.receivedAt, receivedAt);
-      //       return userEntry.receivedAt !== receivedAt;
-      //     }).length === 0;
-      //
-      //     $log.info('notUpdated ', notUpdated);
-      //     initUser(userKey);
-      //
-      //     if (!notUpdated) {
-      //       $log.info('Still in the location ', userKey, location.name);
-      //       return;
-      //     }
-      //     ExitFromLocations.exit(location, userEntry.user);
-      //
-      //   })
-      // })
-
     }
 
     return {
