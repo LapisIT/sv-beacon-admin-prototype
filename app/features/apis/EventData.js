@@ -6,11 +6,11 @@ angular.module('svBeaconApis')
       var programs = ProgramData.programs, pidx =0;
 
       var event = {id:'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
-        name:'Locate16 Conference',
-        dates:['2016-04-12','2016-04-13','2016-04-14'],
-        organiser:'Locate Conferences Australia Pty Ltd',
-        summary:'The Locate Conference (Locate16) is the national conference of the spatial and surveying industries of Australia and New Zealand. The event is an initiative of the Surveying & Spatial Sciences Institute (SSSI), Spatial Industries Business Association (SIBA) and Geospatial Information & Technology Association (GITA) and will be held 12-14 April 2016 at the Melbourne Convention and Exhibition Centre.',
-        website:'http://locateconference.com/'};
+        name:'GIS Water User Group Meeting ',
+        dates:['Friday 13th May 2016'],
+        organiser:'Spatial Vision',
+        summary:'The objective of GWUG is to assist water authorities to leverage their investment in spatial information and technology to support improved planning and managing of assets.',
+        website:'http://spatialvision.com.au/'};
 
       event.locations = Beacons.asObjects(event.id, LocationData.locations);
 
