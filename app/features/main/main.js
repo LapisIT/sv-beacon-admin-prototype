@@ -12,13 +12,16 @@ angular.module('svBeaconAdminPrototypeApp')
                                     $firebaseArray, Users, MonitorWhereabouts) {
     var ctrl = this, isDefined = Validations.isDefined;
     ctrl.event = Events.data.event;
-    var cleanIntervalInMilliseconds = 30000;
+    var cleanIntervalInMilliseconds = Events.settings.cleanIntervalInMilliseconds;
+    $log.info('MainCtrl start...', cleanIntervalInMilliseconds);
 
     var stop = $interval(function () {
+      $log.info('MainCtrl interval called...');
       MonitorWhereabouts.detectAndExits(ctrl.whereabouts, cleanIntervalInMilliseconds);
     }, cleanIntervalInMilliseconds);
 
     $scope.$on('$destroy', function() {
+      $log.info('MainCtrl $destroy...');
       if (angular.isDefined(stop)) {
         $interval.cancel(stop);
         stop = undefined;
@@ -27,7 +30,7 @@ angular.module('svBeaconAdminPrototypeApp')
 
     Users.load().then(function (users) {
       ctrl.users = $firebaseArray(users);
-      $log.info('Users.load() ', ctrl.users.length);
+      $log.info('MainCtrl Users.load() ', ctrl.users.length);
       ctrl.users.$loaded().then(function () {
         $log.info('ctrl.users.$loaded() ', ctrl.users.length);
       });
@@ -36,11 +39,11 @@ angular.module('svBeaconAdminPrototypeApp')
       ctrl.whereabouts = $firebaseArray(whereaboutsRef);
 
       ctrl.whereabouts.$loaded().then(function () {
-        $log.info('ctrl.whereabouts.$loaded() ', ctrl.whereabouts.length);
+        $log.info('MainCtrl ctrl.whereabouts.$loaded() ', ctrl.whereabouts.length);
       });
 
       whereaboutsRef.on('value', function(snapshot) {
-        $log.info('whereaboutsRef.on ctrl.whereabouts', ctrl.whereabouts.length, ctrl.whereabouts[0]);
+        $log.info('MainCtrl whereaboutsRef.on ctrl.whereabouts', ctrl.whereabouts.length);
         MonitorWhereabouts.monitor(ctrl.whereabouts);
       }, function (errorObject) {
         $log.error("The read failed: " + errorObject.code);

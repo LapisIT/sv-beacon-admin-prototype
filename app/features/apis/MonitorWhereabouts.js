@@ -57,42 +57,54 @@ angular.module('svBeaconApis').factory('MonitorWhereabouts',
       return (timeElapsedInMilliseconds < cleanIntervalInMilliseconds);
     }
 
-    var shouldExit = function (user, receivedAts) {
-      return !isEmpty(user.name) && receivedAts.length < 2;
+    var shouldExit = function (user, numberOfSignals) {
+      return (numberOfSignals === 0 ||
+        !isEmpty(user.name) && numberOfSignals < 2);
+    }
+
+    var detectAndExitsUser = function (whereabouts, cleanIntervalInMilliseconds, lastReceivedAtFromUser, userKey, nowInMilliseconds) {
+      var receivedAts =  lastReceivedAtFromUser.receivedAts,
+        numberOfSignals = receivedAts.length,
+        oldestSignal = lastReceivedAtFromUser.receivedAts[0],
+        timeElapsedInMilliseconds = nowInMilliseconds - oldestSignal,
+        user = lastReceivedAtFromUser.user;
+
+      $log.info('detectAndExits Checking user: ', userKey, ' numberOfSignals: ', numberOfSignals,
+        ' oldestSignal: ', oldestSignal, ' timeElapsedInMilliseconds: ', timeElapsedInMilliseconds);
+
+      if(isTimeNotElapsed(timeElapsedInMilliseconds, cleanIntervalInMilliseconds)) {
+        $log.info('detectAndExits Within the interval, await until the time elapsed.');
+        return;
+      }
+
+      if(shouldExit(user, numberOfSignals)) {
+        var location = lastReceivedAtFromUser.location;
+        $log.info('detectAndExits Only one unique signal sent in the interval.', location.name, ' ', user.name);
+        ExitFromLocations.exit(whereabouts, userKey);
+        initLastKnownUserLocation(userKey);
+        return;
+      }
+
+      $log.info('detectAndExits Assuming ', userKey, ' is still in ', lastReceivedAtFromUser.location.name);
+      initLastKnownUserLocation(userKey);
     }
 
     var detectAndExits = function (whereabouts, cleanIntervalInMilliseconds) {
       var now =  new Date(),
-        nowInMilliseconds = now.getTime();
-      $log.info('detectAndExits starting ', now, nowInMilliseconds, ' cleanIntervalInMilliseconds ', cleanIntervalInMilliseconds);
+        nowInMilliseconds = now.getTime(),
+        receivedFromUsers = false;
+      $log.info('detectAndExits starting ', now, nowInMilliseconds, ' cleanIntervalInMilliseconds ', cleanIntervalInMilliseconds,
+      'lastReceivedAtFromUsers ', lastReceivedAtFromUsers);
 
       angular.forEach(lastReceivedAtFromUsers, function (lastReceivedAtFromUser, userKey) {
-        var receivedAts =  lastReceivedAtFromUser.receivedAts,
-          numberOfSignals = receivedAts.length,
-          oldestSignal = lastReceivedAtFromUser.receivedAts[0],
-          timeElapsedInMilliseconds = nowInMilliseconds - oldestSignal,
-          user = lastReceivedAtFromUser.user;
-
-        $log.info('detectAndExits Checking user: ', userKey, ' numberOfSignals: ', numberOfSignals,
-          ' oldestSignal: ', oldestSignal, ' timeElapsedInMilliseconds: ', timeElapsedInMilliseconds);
-
-        if(isTimeNotElapsed(timeElapsedInMilliseconds, cleanIntervalInMilliseconds)) {
-          $log.info('detectAndExits Within the interval, await until the time elapsed.');
-          return;
-        }
-
-        if(shouldExit(user, receivedAts)) {
-          var location = lastReceivedAtFromUser.location;
-          $log.info('detectAndExits Only one unique signal sent in the interval.', location.name, ' ', user.name);
-          ExitFromLocations.exit(whereabouts, lastReceivedAtFromUser.user);
-          initLastKnownUserLocation(userKey);
-          return;
-        }
-
-        $log.info('detectAndExits Assuming ', userKey, ' is still in ', lastReceivedAtFromUser.location.name);
-        initLastKnownUserLocation(userKey);
-
+        receivedFromUsers = true;
+        detectAndExitsUser(whereabouts, cleanIntervalInMilliseconds, lastReceivedAtFromUser, userKey, nowInMilliseconds);
       })
+
+      if(!receivedFromUsers) {
+        $log.info('detectAndExits no signals received, clear all locations...');
+        ExitFromLocations.exitAll(whereabouts);
+      }
 
     }
 
