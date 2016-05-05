@@ -46,6 +46,7 @@
     "commit-patch": "git add . && git commit -m 'patch version'",
     "pv": "mversion patch -m ",
     "mv": "mversion minor -m",
+    "_comments":"You must install firebase for the command below and make sure to run nvm use 5.8 so it uses the node that has firebase",
     "dep": "grunt && firebase deploy",
     "ln": "ln -s /vagrant/sv-beacon-admin-prototype/dist/ /vagrant/sv-beacon-admin-prototype/app/dist"
   }
