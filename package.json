@@ -43,9 +43,9 @@
     "test": "karma start test/karma.conf.js",
     "start": "grunt serve",
     "dist": "grunt",
-    "commit": "git add . && git commit -m 'patch version'",
-    "pv": "mversion patch -m",
-    "mv": "mversion minor",
+    "commit-patch": "git add . && git commit -m 'patch version'",
+    "pv": "mversion patch -m && npm run commit-patch",
+    "mv": "mversion minor -m",
     "dep": "grunt && firebase deploy",
     "ln": "ln -s /vagrant/sv-beacon-admin-prototype/dist/ /vagrant/sv-beacon-admin-prototype/app/dist"
   }
