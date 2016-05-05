@@ -13,7 +13,7 @@ angular.module('svBeaconAdminPrototypeApp')
 
     ctrl.eventInfo = function(signal) {
       var beacon = signal.beacon;
-      return ctrl.event.beacons[Events.beacons.toKey(beacon.uuid,beacon.major,beacon.minor)]['locationName']
+      return ctrl.event.locations[Events.beacons.toKey(beacon.uuid,beacon.major,beacon.minor)]['locationName']
     }
 
 

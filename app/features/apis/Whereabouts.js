@@ -52,6 +52,19 @@ angular.module('svBeaconApis')
         return deferred.promise;
       }
 
+      Whereabouts.exit = function (location, user) {
+        var path = location.name + '/users/' + user.name.replace(/ /g, '');
+        whereabouts(path).then(function (useRef) {
+          useRef.remove(function (error) {
+            if (error) {
+              $log.error("ExitFromLocations, remove from location failed " + location.locationName, error);
+            } else {
+              $log.info("ExitFromLocations, removed from location successfully.", location.locationName);
+            }
+          })
+        });
+      }
+
 
       return Whereabouts;
 
