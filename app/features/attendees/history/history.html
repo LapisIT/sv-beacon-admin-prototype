@@ -11,7 +11,7 @@
       <div class="modal-body">
         <ul style="padding-left: 0; list-style: none">
           <li ng-repeat="(key, visits) in selectedUserVisits | orderBy: 'visited' : true | groupBy:'groupBy'">
-            <h4 ng-bind="key | date:'MMM d' | dateSuffix" style="border-bottom: solid 1px #ccc; padding-bottom: 5px;"></h4>
+            <h4 ng-bind="key | dateSuffix" style="border-bottom: solid 1px #ccc; padding-bottom: 5px;"></h4>
             <p ng-repeat="visit in visits">
               {{visit.visited | date:'mediumTime'}} - {{visit.name}}
             </p>

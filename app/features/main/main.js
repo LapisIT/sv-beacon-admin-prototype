@@ -76,7 +76,7 @@ angular.module('svBeaconAdminPrototypeApp')
         $firebaseArray(usersVisits).$loaded().then(function (userVisitsArray) {
           userVisitsArray.forEach(function (usersVisit) {
             var userVisitDate = new Date(usersVisit.visited);
-            usersVisit.groupBy = (new Date(userVisitDate.getFullYear(), userVisitDate.getMonth(), userVisitDate.getDate(), 0, 0, 0)).getTime();
+            usersVisit.groupBy = (new Date(userVisitDate.getFullYear(), userVisitDate.getMonth(), userVisitDate.getDate(), 0, 0, 0, 0)).getTime();
             $log.info(usersVisit);
           });
           $scope.selectedUser = user;
@@ -94,10 +94,10 @@ angular.module('svBeaconAdminPrototypeApp')
   }).filter('dateSuffix', function ($filter) {
   var suffixes = ["th", "st", "nd", "rd"];
   return function (input) {
-    var dtfilter = $filter('date')(input, 'MMMM dd');
+    var dtfilter = $filter('date')(input, 'MMM d');
     var day = parseInt(dtfilter.slice(-2));
     var relevantDigits = (day < 30) ? day % 20 : day % 30;
     var suffix = (relevantDigits <= 3) ? suffixes[relevantDigits] : suffixes[0];
-    return dtfilter + suffix;
+    return dtfilter!=="undefined"?dtfilter + suffix:'Now';
   };
 });
