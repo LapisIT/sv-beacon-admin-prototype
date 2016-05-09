@@ -40,7 +40,11 @@
       </div>
       <div class="modal-body">
         <ul style="padding-left: 0; list-style: none">
-          <li ng-repeat="(key, visits) in selectedUserVisits | orderBy: 'visited' : true | groupBy:'groupBy'">
+          <p ng-if="selectedUserVisits.length==0">
+            <i class="glyphicon glyphicon-exclamation-sign" style="font-size: 2em; vertical-align: middle;"></i>
+            No recorded visit history for {{selectedUser.name}}
+          </p>
+          <li ng-repeat="(key, visits) in selectedUserVisits | orderBy: 'visited' : true | groupBy:'groupBy'" style="margin-bottom: 40px;">
             <h4 ng-bind="key | dateSuffix" style="border-bottom: solid 1px #ccc; padding-bottom: 5px;"></h4>
             <p ng-repeat="visit in visits">
               {{visit.visited | date:'mediumTime'}} - {{visit.name}}

@@ -7,7 +7,12 @@
     ng-click="settings.update(settings.event)">Update Locations</button>
     <locations>
       <location ng-repeat="location in settings.locations | orderBy:'order'">
-        <h4 style="color:{{location.colour}}"><location ng-bind="location.locationName"></location> </h4>
+        <h4 style="color:{{location.colour}}">
+          <p>
+            {{location.locationName}}
+            <small>({{location.beaconName}})</small>
+          </p>
+        </h4>
         <h5>{{settings.event.id}}:{{location.major}}:{{location.minor}}</h5>
         <label>Proximity</label>
         <hint>Prosimity to decide whether the user is entered or exited</hint>
