@@ -31,7 +31,7 @@ angular.module('svBeaconApis')
       locations[index].settings = {};
       locations[index++].settings.whereabouts = Whereabouts.createConfig(Beacons.proximitySignals.near, numberOfTimesToDecide);
       //6
-      locations.push(createBeacon('6 ice', 'fc03fce84038', '36362', '56186',
+      locations.push(createBeacon('6 ice', 'fc03fce84038', '16440','64744',
         '#85C2E5','Coagulation Filtration System',''));
       locations[index].settings = {};
       locations[index++].settings.whereabouts = Whereabouts.createConfig(Beacons.proximitySignals.near, numberOfTimesToDecide);
