@@ -19,6 +19,7 @@ angular
     'svBeaconApis',
     'svBeaconAdminPrototypeApp.messages',
     'uuid4',
+    'angular.filter',
     'firebase'
   ])
   .config(function ($routeProvider) {

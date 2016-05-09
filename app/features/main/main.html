@@ -21,10 +21,12 @@
     </location>
   </locations>
   <small class="users" style="margin-top: 10px; display: block;">
-    Registered users: {{toList(main.users)}}
+    Registered users: <a href='#/' ng-click="showHistory(user)" ng-repeat="user in main.users">{{user.name}}</a>
   </small>
 
   </event>
 
 </section>
+
+<ng-include src="'/features/attendees/history/history.html'"></ng-include>
 
