@@ -7,7 +7,7 @@ angular.module('svBeaconApis')
       var locations = [], index = 0, numberOfTimesToDecide = 15;
       //1
       locations.push(createBeacon('1 mint', 'e208d3f96d73', '28019', '54265',
-        '#176D00','Butterfly Value Station',''));
+        '#176D00','Butterfly Valve Station',''));
       locations[index].settings = {};
       locations[index++].settings.whereabouts = Whereabouts.createConfig(Beacons.proximitySignals.near, numberOfTimesToDecide);
       //2
