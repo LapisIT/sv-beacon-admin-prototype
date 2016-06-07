@@ -1,0 +1,28 @@
+<div class="modal fade" tabindex="-1" role="dialog" ng-class="{'in': showHistoryDialog}" ng-show="showHistoryDialog"
+     style="display: block">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                          ng-click="hideHistory()">&times;</span>
+        </button>
+        <h4 class="modal-title">{{selectedUser.name}} visits</h4>
+      </div>
+      <div class="modal-body">
+        <ul style="padding-left: 0; list-style: none">
+          <li ng-repeat="(key, visits) in selectedUserVisits | orderBy: 'visited' : true | groupBy:'groupBy'">
+            <h4 ng-bind="key | dateSuffix" style="border-bottom: solid 1px #ccc; padding-bottom: 5px;"></h4>
+            <p ng-repeat="visit in visits">
+              {{visit.visited | date:'mediumTime'}} - {{visit.name}}
+            </p>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="hideHistory()">Close</button>
+      </div>
+    </div>
+  </div>
+  <div
+    style="background-color: rgba(0, 0, 0, 0.44); width: 100%; height: 100%; position: fixed; top:0; left: 0; z-index: -1;"></div>
+</div>

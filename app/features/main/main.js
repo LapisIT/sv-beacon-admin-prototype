@@ -9,18 +9,20 @@
  */
 angular.module('svBeaconAdminPrototypeApp')
   .controller('MainCtrl', function ($log, $scope, $interval, Events, Validations,
-                                    $firebaseArray, Users, MonitorWhereabouts) {
+                                    $firebaseArray, Users, MonitorWhereabouts, UsersVisits) {
     var ctrl = this, isDefined = Validations.isDefined;
     ctrl.event = Events.data.event;
     var cleanIntervalInMilliseconds = Events.settings.cleanIntervalInMilliseconds;
     $log.info('MainCtrl start...', cleanIntervalInMilliseconds);
+
+    $scope.showHistoryDialog = false;
 
     var stop = $interval(function () {
       $log.info('MainCtrl interval called...');
       MonitorWhereabouts.detectAndExits(ctrl.whereabouts, cleanIntervalInMilliseconds);
     }, cleanIntervalInMilliseconds);
 
-    $scope.$on('$destroy', function() {
+    $scope.$on('$destroy', function () {
       $log.info('MainCtrl $destroy...');
       if (angular.isDefined(stop)) {
         $interval.cancel(stop);
@@ -42,7 +44,7 @@ angular.module('svBeaconAdminPrototypeApp')
         $log.info('MainCtrl ctrl.whereabouts.$loaded() ', ctrl.whereabouts.length);
       });
 
-      whereaboutsRef.on('value', function(snapshot) {
+      whereaboutsRef.on('value', function (snapshot) {
         $log.info('MainCtrl whereaboutsRef.on ctrl.whereabouts', ctrl.whereabouts.length);
         MonitorWhereabouts.monitor(ctrl.whereabouts);
       }, function (errorObject) {
@@ -54,7 +56,7 @@ angular.module('svBeaconAdminPrototypeApp')
       var count = 0;
       angular.forEach(users, function () {
         count++;
-      })
+      });
       return count;
     }
 
@@ -66,5 +68,36 @@ angular.module('svBeaconAdminPrototypeApp')
       return usersStr.slice(0, usersStr.length - 2);
     }
 
+    $scope.showHistory = function (user) {
+      $scope.selectedUser = '';
+      $scope.selectedUserVisits = [];
 
-  });
+      UsersVisits.load(user.name).then(function (usersVisits) {
+        $firebaseArray(usersVisits).$loaded().then(function (userVisitsArray) {
+          userVisitsArray.forEach(function (usersVisit) {
+            var userVisitDate = new Date(usersVisit.visited);
+            usersVisit.groupBy = (new Date(userVisitDate.getFullYear(), userVisitDate.getMonth(), userVisitDate.getDate(), 0, 0, 0, 0)).getTime();
+            $log.info(usersVisit);
+          });
+          $scope.selectedUser = user;
+          $scope.selectedUserVisits = userVisitsArray;
+          $scope.showHistoryDialog = true;
+        });
+      })
+    };
+
+    $scope.hideHistory = function () {
+      $scope.showHistoryDialog = false;
+    }
+
+
+  }).filter('dateSuffix', function ($filter) {
+  var suffixes = ["th", "st", "nd", "rd"];
+  return function (input) {
+    var dtfilter = $filter('date')(input, 'MMM d');
+    var day = parseInt(dtfilter.slice(-2));
+    var relevantDigits = (day < 30) ? day % 20 : day % 30;
+    var suffix = (relevantDigits <= 3) ? suffixes[relevantDigits] : suffixes[0];
+    return dtfilter!=="undefined"?dtfilter + suffix:'Now';
+  };
+});
