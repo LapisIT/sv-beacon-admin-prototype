@@ -9,6 +9,7 @@ fi
 npm install -g typescript
 npm install -g yo
 npm install -g grunt-cli bower yo generator-karma generator-angular
+npm install -g mversion
 
 npm install -g firebase-tools
 
